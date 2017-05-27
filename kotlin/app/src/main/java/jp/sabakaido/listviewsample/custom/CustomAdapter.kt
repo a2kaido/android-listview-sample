@@ -12,14 +12,29 @@ import jp.sabakaido.listviewsample.R
  * Created by anikaido on 2017/05/27.
  */
 class CustomAdapter(var context: Context, var items: ArrayList<CustomItem>) : BaseAdapter() {
+    val inflater: LayoutInflater
+
+    init {
+        inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        var layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        var v = layoutInflater.inflate(R.layout.custom_item, parent, false)
+        var v = convertView
+        var holder: CustomViewHolder? = null
 
-        (v.findViewById(R.id.text) as TextView).text = items.get(position).text
+        v?.let {
+            holder = it.tag as CustomViewHolder?
+        } ?: run {
+            v = inflater.inflate(R.layout.custom_item, null)
+            holder = CustomViewHolder(v?.findViewById(R.id.text) as TextView)
+            v?.tag = holder
+        }
 
-        return v
+        holder?.let {
+            it.textView.text = items.get(position).text
+        }
+
+        return v as View
     }
 
     override fun getItem(position: Int): Any {
@@ -33,4 +48,6 @@ class CustomAdapter(var context: Context, var items: ArrayList<CustomItem>) : Ba
     override fun getCount(): Int {
         return items.size
     }
+
+    class CustomViewHolder(var textView: TextView)
 }
