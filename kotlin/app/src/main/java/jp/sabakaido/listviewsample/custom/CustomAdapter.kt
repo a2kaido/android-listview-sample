@@ -1,6 +1,7 @@
 package jp.sabakaido.listviewsample.custom
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import jp.sabakaido.listviewsample.R
  */
 class CustomAdapter(var context: Context, var items: ArrayList<CustomItem>) : BaseAdapter() {
     val inflater: LayoutInflater
+    var i = 0
 
     init {
         inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -28,7 +30,10 @@ class CustomAdapter(var context: Context, var items: ArrayList<CustomItem>) : Ba
             v = inflater.inflate(R.layout.custom_item, null)
             holder = CustomViewHolder(v?.findViewById(R.id.text) as TextView)
             v?.tag = holder
+            v?.id = i++
         }
+
+        Log.d("id", v?.id.toString())
 
         holder?.let {
             it.textView.text = items.get(position).text

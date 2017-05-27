@@ -16,7 +16,28 @@ class CustomActivity : AppCompatActivity() {
 
         var lv = findViewById(R.id.listview) as ListView
 
-        var adapter = CustomAdapter(this, arrayListOf(CustomItem("hoge"), CustomItem("huga")))
+        var adapter = CustomAdapter(this, arrayListOf(
+                CustomItem("a"),
+                CustomItem("b"),
+                CustomItem("c"),
+                CustomItem("d"),
+                CustomItem("e"),
+                CustomItem("f"),
+                CustomItem("g"),
+                CustomItem("h"),
+                CustomItem("i"),
+                CustomItem("j"),
+                CustomItem("k"),
+                CustomItem("l"),
+                CustomItem("m"),
+                CustomItem("n"),
+                CustomItem("o"),
+                CustomItem("p"),
+                CustomItem("q"),
+                CustomItem("r"),
+                CustomItem("s"),
+                CustomItem("t")
+        ))
 
         // adapterをset
         lv.adapter = adapter
